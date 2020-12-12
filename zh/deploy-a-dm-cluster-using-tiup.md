@@ -1,14 +1,10 @@
 ---
-title: 使用 TiUP 部署 DM 集群（实验特性）
+title: 使用 TiUP 部署 DM 集群
 summary: 学习如何使用 TiUP DM 组件来部署 TiDB Data Migration 工具。
 aliases: ['/docs-cn/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible/','/zh/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible']
 ---
 
-# 使用 TiUP 部署 DM 集群（实验特性）
-
-> **注意：**
->
-> 本文描述特性仍为实验特性，不建议在生产环境下使用 TiUP 部署 DM 集群。
+# 使用 TiUP 部署 DM 集群
 
 [TiUP](https://github.com/pingcap/tiup) 是 TiDB 4.0 版本引入的集群运维工具，[TiUP DM](maintain-dm-using-tiup.md) 是 TiUP 提供的使用 Golang 编写的集群管理组件，通过 TiUP DM 组件就可以进行日常的运维工作，包括部署、启动、关闭、销毁、扩缩容、升级 DM 集群以及管理 DM 集群参数。
 
@@ -72,7 +68,7 @@ aliases: ['/docs-cn/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible/',
 
 请根据[配置文件模板](https://github.com/pingcap/tiup/blob/master/examples/dm/topology.example.yaml)，新建一个配置文件 `topology.yaml`。如果有其他组合场景的需求，请根据多个模板自行调整。
 
-一个最小化部署（3 个 dm-master、3 个 dm-worker 与 1 个监控组件）的配置如下：
+部署 3 个 DM-master、3 个 DM-worker 与 1 个监控组件的配置如下：
 
 ```yaml
 ---
@@ -105,6 +101,10 @@ alertmanager_servers:
 
 > **注意：**
 >
+> - 如果不需要确保 DM 集群高可用，则可只部署 1 个 DM-master 节点，且部署的 DM-worker 节点数量不少于上游待迁移的 MySQL/MariaDB 实例数。
+>
+> - 如果需要确保 DM 集群高可用，则推荐部署 3 个 DM-master 节点，且部署的 DM-worker 节点数量大于上游待迁移的 MySQL/MariaDB 实例数（如 DM-worker 节点数量比上游实例数多 2 个）。
+>
 > - 对于需要全局生效的参数，请在配置文件中 `server_configs` 的对应组件下配置。
 >
 > - 对于需要某个节点生效的参数，请在具体节点的 `config` 中配置。
@@ -133,7 +133,7 @@ alertmanager_servers:
 >
 > - 如果是密钥方式，可以通过 `-i` 或者 `--identity_file` 来指定密钥的路径；
 > - 如果是密码方式，可以通过 `-p` 进入密码交互窗口；
-> - 如果已经配置免密登陆目标机，则不需填写认证。
+> - 如果已经配置免密登录目标机，则不需填写认证。
 
 {{< copyable "shell-regular" >}}
 
@@ -147,7 +147,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 - 部署版本为 `${version}`，可以通过执行 `tiup list dm-master` 来查看 TiUP 支持的最新版本。
 - 初始化配置文件为 `topology.yaml`。
 - `--user root`：通过 root 用户登录到目标主机完成集群部署，该用户需要有 ssh 到目标机器的权限，并且在目标机器有 sudo 权限。也可以用其他有 ssh 和 sudo 权限的用户完成部署。
-- `-i` 及 `-p`：非必选项，如果已经配置免密登陆目标机，则不需填写，否则选择其一即可。`-i` 为可登录到目标机的 root 用户（或 `--user` 指定的其他用户）的私钥，也可使用 `-p` 交互式输入该用户的密码。
+- `-i` 及 `-p`：非必选项，如果已经配置免密登录目标机，则不需填写，否则选择其一即可。`-i` 为可登录到目标机的 root 用户（或 `--user` 指定的其他用户）的私钥，也可使用 `-p` 交互式输入该用户的密码。
 - TiUP DM 使用内置的 SSH 客户端，如需使用系统自带的 SSH 客户端，请参考 TiUP DM 文档中[使用中控机系统自带的 SSH 客户端连接集群](maintain-dm-using-tiup.md#使用中控机系统自带的-ssh-客户端连接集群)章节进行设置。
 
 预期日志结尾输出会有 ```Deployed cluster `dm-test` successfully``` 关键词，表示部署成功。
@@ -165,7 +165,7 @@ TiUP 支持管理多个 DM 集群，该命令会输出当前通过 TiUP DM 管�
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  v2.0.0-rc  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  v2.0.0  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
 ## 第 5 步：检查部署的 DM 集群情况

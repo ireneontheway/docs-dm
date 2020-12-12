@@ -20,7 +20,7 @@ DM 2.0 相比于 1.0，主要有以下改进：
 <NavColumn>
 <ColumnTitle>关于 TiDB Data Migration</ColumnTitle>
 
-- [性能数据](benchmark-v1.0-ga.md)
+- [性能数据](benchmark-v2.0-ga.md)
 - [Table routing](key-features.md#table-routing)
 - [Block & Allow Lists](key-features.md#block--allow-table-lists)
 - [Binlog Event Filter](key-features.md#binlog-event-filter)
@@ -66,11 +66,11 @@ DM 2.0 相比于 1.0，主要有以下改进：
 <NavColumn>
 <ColumnTitle>教程</ColumnTitle>
 
-- [简单的从库迁移场景](usage-scenario-simple-migration.md)
+- [Data Migration 简单使用场景](usage-scenario-simple-migration.md)
 - [分库分表合并场景](usage-scenario-shard-merge.md)
-- [从 Aurora 迁移到 TiDB](migrate-from-mysql-aurora.md)
+- [从兼容 MySQL 的数据库迁移到 TiDB](migrate-from-mysql-aurora.md)
 - [分表合并数据迁移最佳实践](shard-merge-best-practices.md)
-- [DM-worker 在上游 MySQL 主从间切换](usage-scenario-master-slave-switch.md)
+- [切换 DM-worker 与上游 MySQL 实例的连接](usage-scenario-master-slave-switch.md)
 
 </NavColumn>
 

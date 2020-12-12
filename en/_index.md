@@ -20,7 +20,7 @@ aliases: ['/docs/tidb-data-migration/dev/']
 <NavColumn>
 <ColumnTitle>About TiDB Data Migration</ColumnTitle>
 
-- [Performance](benchmark-v1.0-ga.md)
+- [Performance](benchmark-v2.0-ga.md)
 - [Table routing](key-features.md#table-routing)
 - [Block & Allow Lists](key-features.md#block-and-allow-table-lists)
 - [Binlog Event Filter](key-features.md#binlog-event-filter)
@@ -65,11 +65,11 @@ aliases: ['/docs/tidb-data-migration/dev/']
 <NavColumn>
 <ColumnTitle>Tutorials</ColumnTitle>
 
-- [Simple Usage Scenario](usage-scenario-simple-migration.md)
+- [Data Migration Simple Usage Scenario](usage-scenario-simple-migration.md)
 - [Shard Merge Scenario](usage-scenario-shard-merge.md)
-- [Migrate from MySQL (Amazon Aurora)](migrate-from-mysql-aurora.md)
+- [Migrate from a MySQL-compatible Database](migrate-from-mysql-aurora.md)
 - [Shard Merge Scenario Best Practices](shard-merge-best-practices.md)
-- [Switch DM-worker connection](usage-scenario-master-slave-switch.md)
+- [Switch DM-worker connection between MySQL Instances](usage-scenario-master-slave-switch.md)
 
 </NavColumn>
 

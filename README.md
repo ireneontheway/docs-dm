@@ -2,8 +2,17 @@
 
 This repository stores all the source files of [TiDB Data Migration (DM) documentation](https://pingcap.com/docs/tidb-data-migration/stable/) at the PingCAP website. That is, the documentation for [TiDB DM](https://github.com/pingcap/dm).
 
+Currently, the official documentation supports two languages:
+
 - `en`: [documentation in English](/en/TOC.md)
 - `zh`: [documentation in Chinese](/zh/TOC.md)
+
+You can use Google Translate to view the documentation in different languages. For example:
+
+- `fr`: [documentation in French](http://translate.google.com/translate?hl=en&sl=en&tl=fr&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs-dm%2Fblob%2Fmaster%2Fen%2FTOC.md)
+- `ja`: [documentation in Japanese](http://translate.google.com/translate?hl=en&sl=en&tl=ja&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs-dm%2Fblob%2Fmaster%2Fen%2FTOC.md)
+- `ko`: [documentation in Korean](http://translate.google.com/translate?hl=en&sl=en&tl=ko&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs-dm%2Fblob%2Fmaster%2Fen%2FTOC.md)
+- `id`: [documentation in Indonesian](http://translate.google.com/translate?hl=en&sl=en&tl=id&u=https%3A%2F%2Fgithub.com%2Fpingcap%2Fdocs-dm%2Fblob%2Fmaster%2Fen%2FTOC.md)
 
 ## Documentation versions
 
@@ -11,7 +20,8 @@ Currently, we maintain the following versions for TiDB DM documentation, each wi
 
 | Branch name | Version description |
 | :--- | :-- |
-| `master` | the latest development version, including v2.0 changes for now |
+| `master` | the latest development version, including v3.0 changes for now |
+| `release-2.0` | the latest 2.0 stable version |
 | `release-1.0` | the latest 1.0 stable version |
 
 > **Note:**

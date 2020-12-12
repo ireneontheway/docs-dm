@@ -1,10 +1,10 @@
 ---
-title: 从 MySQL 迁移数据 —— 以 Amazon Aurora MySQL 为例
+title: 从兼容 MySQL 的数据库迁移数据——以 Amazon Aurora MySQL 为例
 summary: 使用 DM 从 MySQL/Amazon Aurora MySQL 迁移数据。
 aliases: ['/docs-cn/tidb-data-migration/dev/migrate-from-mysql-aurora/']
 ---
 
-# 从 MySQL 迁移数据——以 Amazon Aurora MySQL 为例
+# 从兼容 MySQL 的数据库迁移数据——以 Amazon Aurora MySQL 为例
 
 本文以 [Amazon Aurora MySQL](https://aws.amazon.com/cn/rds/aurora/details/mysql-details/) 为例介绍如何使用 DM 从 MySQL 兼容的数据库迁移数据到 TiDB。
 
@@ -187,7 +187,7 @@ tiup dmctl --master-addr 127.0.0.1:8261 operate-source create dm-test/source2.ya
 
 > **注意：**
 >
-> 由于 Aurora 不支持 FTWRL，仅使用全量模式导出数据时需要暂停写入，参见 [AWS 官网说明](https://aws.amazon.com/cn/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/)。在示例的全量+增量模式下，DM 将自动启用 `safe mode` 解决这一问题。在其他模式下如需保证数据一致，参见 [AWS 官网说明](https://aws.amazon.com/cn/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/)操作。
+> 由于 Aurora 不支持 FTWRL，仅使用全量模式导出数据时需要暂停写入，参见 [AWS 官网说明](https://aws.amazon.com/cn/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/)。在示例的全量+增量模式下，DM 将自动启用 [`safe mode`](glossary.md#safe-mode) 解决这一问题。在其他模式下如需保证数据一致，参见 [AWS 官网说明](https://aws.amazon.com/cn/premiumsupport/knowledge-center/mysqldump-error-rds-mysql-mariadb/)操作。
 
 本示例选择迁移 Aurora 已有数据并将新增数据实时迁移给 TiDB，即**全量+增量**模式。根据上文的 TiDB 集群信息、已添加的 `source-id`、要迁移的表，保存如下任务配置文件 `task.yaml`：
 

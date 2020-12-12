@@ -36,6 +36,7 @@ DM 支持在线上执行分库分表的 DDL 语句（通称 Sharding DDL），�
 
 - `ALTER TABLE table_name ADD COLUMN column_name datatype NOT NULL`（添加无默认值的 not null 的列）。
 - `ALTER TABLE table_name ADD COLUMN column_name datetime DEFAULT NOW()`（增加的列默认值不固定）。
+- `ALTER TABLE table_name ADD COLUMN col1 INT, DROP COLUMN col2`（在一个 DDL 语句中同时包含 `ADD COLUMN` 与 `DROP COLUMN`）。
 - `ALTER TABLE table_name RENAME COLUMN column_1 TO column_2;`（重命名列）。
 - `ALTER TABLE table_name RENAME INDEX index_1 TO index_2;`（重命名索引）。
 
@@ -44,6 +45,8 @@ DM 支持在线上执行分库分表的 DDL 语句（通称 Sharding DDL），�
 - 增量复制任务需要确保开始迁移的 binlog position 对应的各分表的表结构必须一致。
 - 进入 sharding group 的新表必须与其他成员的表结构一致（正在执行一个 DDL 批次时禁止 `CREATE/RENAME TABLE`）。
 - 不支持 `DROP TABLE`/`DROP DATABASE`。
+- 不支持 `TRUNCATE TABLE`。
+- 单条 DDL 语句要求仅包含对一张表的操作。
 - TiDB 不支持的 DDL 语句在 DM 也不支持。
 - 新增列的默认值不能包含 `current_timestamp`、`rand()`、`uuid()` 等，否则会造成上下游数据不一致。
 

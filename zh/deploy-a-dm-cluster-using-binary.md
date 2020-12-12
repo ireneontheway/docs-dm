@@ -7,6 +7,10 @@ aliases: ['/docs-cn/tidb-data-migration/dev/deploy-a-dm-cluster-using-binary/']
 
 本文将介绍如何使用 DM binary 快速部署 DM 集群。
 
+> **注意：**
+>
+> 对于生产环境，推荐[使用 TiUP 部署 DM 集群及相关监控组件](deploy-a-dm-cluster-using-tiup.md)。
+
 ## 准备工作
 
 使用下表中的链接下载官方 binary：
@@ -36,6 +40,10 @@ aliases: ['/docs-cn/tidb-data-migration/dev/deploy-a-dm-cluster-using-binary/']
 下面以此为例，说明如何部署 DM。
 
 > **注意：**
+>
+> - 如果不需要确保 DM 集群高可用，则可只部署 1 个 DM-master 节点，且部署的 DM-worker 节点数量不少于上游待迁移的 MySQL/MariaDB 实例数。
+>
+> - 如果需要确保 DM 集群高可用，则推荐部署 3 个 DM-master 节点，且部署的 DM-worker 节点数量大于上游待迁移的 MySQL/MariaDB 实例数（如 DM-worker 节点数量比上游实例数多 2 个）。
 >
 > - 需要确保以下组件间端口可正常连通：
 >

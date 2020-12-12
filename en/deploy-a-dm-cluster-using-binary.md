@@ -8,6 +8,10 @@ aliases: ['/docs/tidb-data-migration/dev/deploy-a-dm-cluster-using-binary/']
 
 This document introduces how to quickly deploy the Data Migration (DM) cluster using DM binary.
 
+> **Note:**
+>
+> In the production environment, it is recommended to [use TiUP to deploy a DM cluster](deploy-a-dm-cluster-using-tiup.md).
+
 ## Preparations
 
 Download the official binary using the download link in the following table:
@@ -41,6 +45,10 @@ Here is the address of each node:
 Based on this scenario, the following sections describe how to deploy the DM cluster.
 
 > **Note:**
+>
+> - If you do not need to ensure high availability of the DM cluster, deploy only one DM-master node, and the number of deployed DM-worker nodes must be no less than the number of upstream MySQL/MariaDB instances to be migrated.
+>
+> - To ensure high availability of the DM cluster, it is recommended to deploy three DM-master nodes, and the number of deployed DM-worker nodes must be greater than the number of upstream MySQL/MariaDB instances to be migrated (for example, the number of DM-worker nodes is two more than the number of upstream instances).
 >
 > - Make sure that the ports among the following components are interconnected:
 >     - The `8291` ports among the DM-master nodes are interconnected.

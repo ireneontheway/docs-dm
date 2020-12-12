@@ -1,14 +1,10 @@
 ---
-title: Deploy a DM Cluster Using TiUP (Experimental)
+title: Deploy a DM Cluster Using TiUP
 summary: Learn how to deploy TiDB Data Migration using TiUP DM.
 aliases: ['/docs/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible/','/docs/tools/dm/deployment/','/tidb-data-migration/dev/deploy-a-dm-cluster-using-ansible']
 ---
 
-# Deploy a DM Cluster Using TiUP (Experimental)
-
-> **Warning:**
->
-> Using TiUP to deploy a DM cluster is still an experimental feature. It is **NOT** recommended to use TiUP to deploy a DM cluster in production.
+# Deploy a DM Cluster Using TiUP
 
 [TiUP](https://github.com/pingcap/tiup) is a cluster operation and maintenance tool introduced in TiDB 4.0. TiUP provides [TiUP DM](maintain-dm-using-tiup.md), a cluster management component written in Golang. By using TiUP DM, you can easily perform daily TiDB Data Migration (DM) operations, including deploying, starting, stopping, destroying, scaling, and upgrading a DM cluster, and manage DM cluster parameters.
 
@@ -72,7 +68,7 @@ According to the intended cluster topology, you need to manually create and edit
 
 You need to create a YAML configuration file (named `topology.yaml` for example) according to the [configuration file template](https://github.com/pingcap/tiup/blob/master/examples/dm/topology.example.yaml). For other scenarios, edit the configuration accordingly.
 
-The configuration file of a minimal deployment topology (3 DM-master instances, 3 DM-worker instances, and 1 monitoring component) is as follows:
+The configuration of deploying three DM-masters, three DM-workers, and one monitoring component instance is as follows:
 
 ```yaml
 ---
@@ -104,6 +100,10 @@ alertmanager_servers:
 ```
 
 > **Note:**
+>
+> - If you do not need to ensure high availability of the DM cluster, deploy only one DM-master node, and the number of deployed DM-worker nodes must be no less than the number of upstream MySQL/MariaDB instances to be migrated.
+>
+> - To ensure high availability of the DM cluster, it is recommended to deploy three DM-master nodes, and the number of deployed DM-worker nodes must be greater than the number of upstream MySQL/MariaDB instances to be migrated (for example, the number of DM-worker nodes is two more than the number of upstream instances).
 >
 > - For parameters that should be globally effective, configure these parameters of corresponding components in the `server_configs` section of the configuration file.
 >
@@ -160,7 +160,7 @@ TiUP supports managing multiple DM clusters. The command above outputs informati
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  v2.0.0-rc  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  v2.0.0  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
 ## Step 5: Check the status of the deployed DM cluster

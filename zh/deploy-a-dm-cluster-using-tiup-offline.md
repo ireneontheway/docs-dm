@@ -46,7 +46,7 @@ summary: 学习如何使用 TiUP DM 组件来离线部署 TiDB Data Migration �
         {{< copyable "shell-regular" >}}
 
         ```bash
-        export version=v2.0.0-rc  # 可修改成实际需要的版本
+        export version=v2.0.0  # 可修改成实际需要的版本
         tiup mirror clone tidb-dm-${version}-linux-amd64 --os=linux --arch=amd64 \
             --dm-master=${version} --dm-worker=${version} --dmctl=${version} \
             --alertmanager=v0.17.0 --grafana=v4.0.3 --prometheus=v4.0.3 \
@@ -72,7 +72,7 @@ summary: 学习如何使用 TiUP DM 组件来离线部署 TiDB Data Migration �
 {{< copyable "shell-regular" >}}
 
 ```bash
-export version=v2.0.0-rc # 可修改成实际需要的版本
+export version=v2.0.0 # 可修改成实际需要的版本
 tar xzvf tidb-dm-${version}-linux-amd64.tar.gz
 sh tidb-dm-${version}-linux-amd64/local_install.sh
 source /home/tidb/.bash_profile
@@ -88,7 +88,7 @@ source /home/tidb/.bash_profile
 
 请根据[配置文件模板](https://github.com/pingcap/tiup/blob/master/examples/dm/topology.example.yaml)，新建一个配置文件 `topology.yaml`。如果有其他组合场景的需求，请根据多个模板自行调整。
 
-一个最小化部署（3 个 dm-master、3 个 dm-worker 与 1 个监控组件）的配置如下：
+部署 3 个 DM-master、3 个 DM-worker 与 1 个监控组件的配置如下：
 
 ```yaml
 ---
@@ -120,6 +120,10 @@ alertmanager_servers:
 ```
 
 > **注意：**
+>
+> - 如果不需要确保 DM 集群高可用，则可只部署 1 个 DM-master 节点，且部署的 DM-worker 节点数量不少于上游待迁移的 MySQL/MariaDB 实例数。
+>
+> - 如果需要确保 DM 集群高可用，则推荐部署 3 个 DM-master 节点，且部署的 DM-worker 节点数量大于上游待迁移的 MySQL/MariaDB 实例数（如 DM-worker 节点数量比上游实例数多 2 个）。
 >
 > - 对于需要全局生效的参数，请在配置文件中 `server_configs` 的对应组件下配置。
 >
@@ -181,7 +185,7 @@ TiUP 支持管理多个 DM 集群，该命令会输出当前通过 TiUP DM 管�
 ```log
 Name  User  Version  Path                                  PrivateKey
 ----  ----  -------  ----                                  ----------
-dm-test  tidb  v2.0.0-rc  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
+dm-test  tidb  v2.0.0  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
 ## 第 6 步：检查部署的 DM 集群情况
